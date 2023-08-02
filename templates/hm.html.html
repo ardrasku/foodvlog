@@ -1,0 +1,168 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block body %}
+<!--<!DOCTYPE html>-->
+<html lang="en" xmlns="http://www.w3.org/1999/html">
+   <head>
+      <!-- basic -->
+      <meta charset="utf-8">
+      <meta http-equiv="X-UA-Compatible" content="IE=edge">
+      <!-- mobile metas -->
+      <meta name="viewport" content="width=device-width, initial-scale=1">
+      <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+      <!-- site metas -->
+      <title>WELCOME</title>
+      <meta name="keywords" content="">
+      <meta name="description" content="">
+      <meta name="author" content="">
+      <!-- bootstrap css -->
+      <link rel="stylesheet" href="{% static 'hm/css/bootstrap.min.css' %}">
+      <!-- style css -->
+      <link rel="stylesheet" href="{% static 'hm/css/style.css' %}">
+      <!-- responsive-->
+      <link rel="stylesheet" href="{% static 'hm/css/responsive.css' %}">
+      <!-- awesome fontfamily -->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/{% static 'hm/css//font-awesome.min.css' %}">
+      <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script><![endif]-->
+      <style>
+         .dropbtn {
+                  background-color: #4CAF50;
+                  color: white;
+                  padding: 16px;
+                  font-size: 16px;
+                  border: none;
+                  cursor: pointer;
+                }
+
+                .dropdown {
+                  position: relative;
+                  display: inline-block;
+                  padding left:56px;
+                }
+
+                .dropdown-content {
+                  display: none;
+                  position: absolute;
+                  background-color: #f9f9f9;
+                  min-width: 160px;
+                  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+                  z-index: 1;
+                }
+
+                .dropdown-content a {
+                  color: black;
+                  padding: 12px 16px;
+                  text-decoration: none;
+                  display: block;
+                }
+
+                .dropdown-content a:hover {background-color: #f1f1f1}
+
+                .dropdown:hover .dropdown-content {
+                  display: block;
+                }
+
+                .dropdown:hover .dropbtn {
+                  background-color: #3e8e41;
+                }
+      </style>
+
+   </head>
+   <body class="main-layout">
+      <!-- loader  -->
+      <div class="loader_bg">
+
+      </div>
+      <div id="top_section" class="banner_main" style="background-image:url({% static 'hm/images/bg.jpg' %})">
+         <div class="container">
+            <div class="row">
+               <div class="col-md-12">
+                  <div id="myCarousel" class="carousel slide" data-ride="carousel">
+                      <div class="carousel-inner">
+                        <div class="carousel-item active">
+                           <div class="container-fluid">
+
+                              <div class="carousel-caption relative">
+                                 <div class="bluid">
+                                     <h1 STYLE="COLOR:#2ecc71">LA VIE <br> QUALITY FOOD ITEMS </h1>
+                                    <p>Shop Till You Drop
+                                    </p>
+                                    <!-- <a class="read_more" href="about.html">About Company </a><a class="read_more" href="contact.html">Contact </a> -->
+                                 </div>
+                                  </div>
+                               <div class="topnav">
+
+                                     <div class="search-container">
+                                         <form action="{% url 'search' %}" method="get">
+                                          <input type="text" placeholder="Search here..." name="q">
+                                          <button type="submit"><i class="fa fa-search"></i></button>
+                                        </form>
+                                      </div>
+                                    </div>
+                              </div>
+                           </div>
+                        </div>
+                     </div>
+                  </div>
+               </div>
+            </div>
+         </div>
+      </div>
+      <!-- end slider section -->
+      <!-- we_do -->
+      <div class="dropdown">
+  <button class="dropbtn">FILTER</button>
+  <div class="dropdown-content">
+  <a href="/">All</a>
+     {% for i in ct %}
+  <a href={{i.get_url}}>{{i.name}}</a>
+     {% endfor %}
+  </div>
+</div>
+
+      <div class="shop">
+         <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                   <div id="we1" class="carousel slide" data-ride="carousel">
+                       <div class="carousel-inner">
+                            <div class="carousel-item active">
+                                <div class="container-fluid">
+                                      <div class="carousel-caption we1_do">
+                                         <div class="row">
+                                            {% for i in pg.object_list %}
+                                            <div class="col-md-4">
+                                               <div class="we_box text_align_center">
+                                                   <figure><a class="image" href={{i.get_url}}> <img src="{{i.img.url}}" alt="#" style="height:250px;width:250px"></a></figure></a>
+                                                  <h3>{{i.name}}</h3>
+                                                  <p>{{i.desc|truncatewords:15}}</p><br>
+                                               </div>
+                                            </div>
+                                            {% endfor %}
+                                         </div>
+                                      </div>
+                                </div>
+                            </div>
+                       </div>
+                            <center>
+                               {% for p in pg.paginator.page_range %}
+                               <a href="?page={{p}}" class="btn btn light btn sum " style="background-color:yellow">{{p}}</a>
+
+                                  {% endfor %}
+                            </center>
+                  </div>
+                </div>
+            </div>
+         </div>
+      </div>
+
+
+      <script src="{% static 'hm/js/jquery.min.js' %}"></script>
+      <script src="{% static 'hm/js/bootstrap.bundle.min.js' %}"></script>
+      <script src="{% static 'hm/js/jquery-3.0.0.min.js' %}"></script>
+      <script src="{% static 'hm/js/custom.js' %}"></script>
+   </body>
+</html>
+{% endblock %}
